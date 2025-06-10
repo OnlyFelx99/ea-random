@@ -1,12 +1,11 @@
 
-from flask import Flask
+from flask import Flask, jsonify
 import random
 import json
 
 app = Flask(__name__)
 
 # Função para carregar a lista de animais do arquivo JSON
-@app.route('emojis', methods=['GET'])
 def carregaranimais():
     try:
         with open('animals.json', 'r') as file:
@@ -15,14 +14,19 @@ def carregaranimais():
     except FileNotFoundError:
         return ["🐒", "🐊", "🐯", "🦆", "🦁"]
 
-
-def emojisrandom():
-    # Carrega a lista de animais dinamicamente
+# Rota para retornar a lista de animais
+@app.route('/emojis', methods=['GET'])
+def obter_emojis():
     animais = carregaranimais()
-    
-    # Escolhe aleatoriamente um animal da lista
+    return jsonify(animais)
+
+# Rota para retornar um animal aleatório
+@app.route('/emojis/random', methods=['GET'])
+def emojisrandom():
+    animais = carregaranimais()
     animalescolhido = random.choice(animais)
-    return animalescolhido
+    return jsonify(animalescolhido)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
