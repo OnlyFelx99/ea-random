@@ -9,7 +9,7 @@
   ],
   "routes": [
     {
-      "src": "/EA/Emojis",
+      "src": "/(*.)",
       "dest": "/index.py"
     }
   ]
