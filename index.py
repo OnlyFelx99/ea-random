@@ -14,7 +14,7 @@ def carregar_animais():
     except FileNotFoundError:
         return ["🐒", "🐊", "🐯", "🦆", "🦁"]
 
-@app.route('/EA/Emojis', methods=['GET'])
+@app.route('emojis', methods=['GET'])
 def emojisrandom():
     # Carrega a lista de animais dinamicamente
     animais = carregar_animais()
